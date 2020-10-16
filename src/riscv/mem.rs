@@ -8,19 +8,21 @@ impl Mem {
     pub fn new(length: usize) -> Self {
         Self(vec![0; length])
     }
-}
 
-impl ops::Index<usize> for Mem {
-    type Output = u8;
-
-    fn index(&self, index: usize) -> &Self::Output {
-        &self.0[index]
+    pub fn read_u8(&self, addr: usize) -> u8 {
+        self.0[addr]
     }
-}
 
-impl ops::IndexMut<usize> for Mem {
-    fn index_mut(&mut self, index: usize) -> &mut Self::Output {
-        &mut self.0[index]
+    pub fn write_u8(&mut self, addr: usize, val: u8) {
+        self.0[addr] = val;
+    }
+
+    pub fn read_u16(&self, addr: usize) -> u16 {
+        let t_bytes = &self.0[addr..addr+std::mem::size_of::<u16>()];
+        u16::from_le_bytes(t_bytes.try_into())
+    }
+
+    pub fn write_u8(&mut self, addr: usize, val: u8) {
     }
 }
 
@@ -36,8 +38,8 @@ mod tests {
     #[test]
     fn test_read_write_u8() {
         let mut m = super::Mem::new(10);
-        assert_eq!(0, m[0]);
-        m[0] = 123;
-        assert_eq!(123, m[0]);
+        assert_eq!(0, m.read_u8(0));
+        m.write_u8(0, 123);
+        assert_eq!(123, m.read_u8(0));
     }
 }
