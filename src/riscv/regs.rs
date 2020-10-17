@@ -64,12 +64,12 @@ fn test_creation() {
 fn test_x_regs() {
     let mut r: Regs<u32> = Regs::new();
     for n in 0..32 {
-        r.r_set(31-n, n as u32);
+        r.r_set(31 - n, n as u32);
     }
     // zero reg is always zero
     assert_eq!(0, r.r(0));
     for n in 0..31 {
-        assert_eq!(n as u32, r.r(31-n));
+        assert_eq!(n as u32, r.r(31 - n));
     }
     assert_eq!(0, r.zero());
     assert_eq!(30, r.ra());
