@@ -1,5 +1,4 @@
 {
-    "rust.show_warnings": false,
     "editor.wordBasedSuggestions": false,
     "cSpell.enabled": false
 }
