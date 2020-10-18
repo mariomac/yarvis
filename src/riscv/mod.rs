@@ -1,6 +1,8 @@
+mod decoder;
 mod instr;
 mod mem;
 mod regs;
 
+pub type Instr = instr::Instr;
 pub type Mem = mem::Mem;
-pub type Regs<u32> = regs::Regs<u32>;
+pub type Regs = regs::Regs<u32>;
